@@ -63,8 +63,8 @@ const viewAllNews = newsItems => {
                                     <h6>${newsItem.author.name ? newsItem.author.name : 'No Author'}</h6>
                                     <p>${newsItem.author.published_date ? newsItem.author.published_date : 'JUST NOW'}</p>
                                 </div>
-                                <p><i class="fa-solid fa-eye">${newsItem.total_view}</i></p>
-                                <button class=" btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+                                <p><i class="fa-solid fa-eye">${newsItem.total_view ? newsItem.total_view : 'No Views Yet'}</i></p>
+                                <button onclick="loadNewsDetails('${newsItem._id}')" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,39 @@ const viewAllNews = newsItems => {
         allNewsContainer.appendChild(newsCard);
 
     });
+}
+
+
+// ---------------------------------------------------------------------------
+
+const loadNewsDetails = async news_id => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsDetails(data.data[0]);
+}
+
+const displayNewsDetails = detailNews => {
+    console.log(detailNews);
+    const modalTitle = document.getElementById('exampleModalLabel');
+    modalTitle.innerText = detailNews.title;
+    const detailNewsBody = document.getElementById('news-detail-body');
+    detailNewsBody.innerHTML = `
+                        <div class="card-body">
+                            
+                            <p class="card-text">${detailNews.details}</p>
+                            <div class=" nav nav-fill  justify-content-between  align-items-center">
+                                <div>
+                                    <img src="${detailNews.author.img}" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                                    <h6>${detailNews.author.name ? detailNews.author.name : 'No Author'}</h6>
+                                    <p>${detailNews.author.published_date ? detailNews.author.published_date : 'JUST NOW'}</p>
+                                </div>
+                                <p><i class="fa-solid fa-eye">${detailNews.total_view ? detailNews.total_view : 'No Views Yet'}</i></p>
+                                
+                            </div>
+                        </div>
+    
+    `
 }
 
 
