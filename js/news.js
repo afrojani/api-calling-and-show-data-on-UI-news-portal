@@ -35,23 +35,37 @@ const viewAllNews = newsItems => {
     console.log(newsItems);
     const allNewsContainer = document.getElementById('all-news');
     allNewsContainer.innerHTML = '';
+    // const noNewsUpdate = document.getElementById('no-news');
+    // if (newsItems.length === 0) {
+    //     noNewsUpdate.classList.remove('d-none')
+    // }
+    // else {
+    //     noNewsUpdate.classList.add('d-none')
+    // }
 
     newsItems.forEach(newsItem => {
         const newsCard = document.createElement('div');
-        // newsCard.classList.add('card mb-3');
+
 
         newsCard.innerHTML = `
             <div class="card mb-3">
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <img src="${newsItem.image_url}" class="img-fluid rounded-start" alt="...">
+                        <img src="${newsItem.thumbnail_url}" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <h5 class="card-title">${newsItem.title}</h5>
+                            <p class="card-text">${newsItem.details.slice(0, 300) + '...'}</p>
+                            <div class=" nav nav-fill  justify-content-between  align-items-center">
+                                <div>
+                                    <img src="${newsItem.author.img}" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                                    <h6>${newsItem.author.name ? newsItem.author.name : 'No Author'}</h6>
+                                    <p>${newsItem.author.published_date ? newsItem.author.published_date : 'JUST NOW'}</p>
+                                </div>
+                                <p><i class="fa-solid fa-eye">${newsItem.total_view}</i></p>
+                                <button class=" btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
