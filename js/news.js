@@ -33,15 +33,17 @@ const allNews = async id => {
 
 const viewAllNews = newsItems => {
     console.log(newsItems);
+
+    const noNewsUpdate = document.getElementById('no-news');
+    if (newsItems.length === 0) {
+        noNewsUpdate.classList.remove('d-none')
+    }
+    else {
+        noNewsUpdate.classList.add('d-none')
+    }
     const allNewsContainer = document.getElementById('all-news');
     allNewsContainer.innerHTML = '';
-    // const noNewsUpdate = document.getElementById('no-news');
-    // if (newsItems.length === 0) {
-    //     noNewsUpdate.classList.remove('d-none')
-    // }
-    // else {
-    //     noNewsUpdate.classList.add('d-none')
-    // }
+
 
     newsItems.forEach(newsItem => {
         const newsCard = document.createElement('div');
