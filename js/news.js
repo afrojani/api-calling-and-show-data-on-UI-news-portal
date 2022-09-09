@@ -16,7 +16,7 @@ const displayCategories = categories => {
         categoryList.classList.add('nav-item');
 
         categoryList.innerHTML = `
-        <a onclick="allNews('${category.category_id}')" class="nav-link" href="#">${category.category_name}</a>
+        <a onclick="allNews('${category.category_id}'); toggleSpinner(true);" class="nav-link" href="#">${category.category_name}</a>
         `;
         categoryContainer.appendChild(categoryList);
 
@@ -81,8 +81,8 @@ const viewAllNews = newsItems => {
         
         `;
         allNewsContainer.appendChild(newsCard);
-
     });
+    toggleSpinner(false);
 }
 
 
@@ -116,6 +116,17 @@ const displayNewsDetails = detailNews => {
                         </div>
     
     `
+}
+
+// spinner
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
+    else {
+        loaderSection.classList.add('d-none')
+    }
 }
 
 
