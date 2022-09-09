@@ -11,6 +11,7 @@ const displayCategories = categories => {
     // console.log(categories);
     const categoryContainer = document.getElementById('category-list');
     categories.forEach(category => {
+        // console.log(category);
         const categoryList = document.createElement('li');
         categoryList.classList.add('nav-item');
 
@@ -33,6 +34,11 @@ const allNews = async id => {
 
 const viewAllNews = newsItems => {
     console.log(newsItems);
+
+    const numberOfNews = document.getElementById('number-news');
+    numberOfNews.innerHTML = `
+    <h4>${newsItems.length} news found for this category.</h4>
+    `;
 
     const noNewsUpdate = document.getElementById('no-news');
     if (newsItems.length === 0) {
