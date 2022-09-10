@@ -75,10 +75,10 @@ const viewAllNews = newsItems => {
         newsCard.innerHTML = `
             <div class="card mb-3">
                 <div class="row g-3">
-                    <div class="col-md-4">
-                        <img src="${newsItem.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                    <div class=" col-12 col-md-4">
+                        <img src="${newsItem.thumbnail_url}" class=" card-img rounded-start" alt="...">
                     </div>
-                    <div class="col-md-8">
+                    <div class=" col-12 col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">${newsItem.title}</h5>
                             <p class="card-text">${newsItem.details.slice(0, 300) + '...'}</p>
