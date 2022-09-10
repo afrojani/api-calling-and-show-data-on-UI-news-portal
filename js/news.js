@@ -15,9 +15,10 @@ const displayCategories = categories => {
         const categoryList = document.createElement('li');
         categoryList.classList.add('nav-item');
 
-        // spinner start
+
         categoryList.innerHTML = `
-        <a onclick="allNews('${category.category_id}'); toggleSpinner(true);" class="nav-link" href="#">${category.category_name}</a>
+        <a onclick="allNews('${category.category_id}')" class="nav-link " href="#" onMouseOver="this.style.backgroundColor='cyan'"
+        onMouseOut="this.style.backgroundColor='white'" >${category.category_name}</a>
         `;
         categoryContainer.appendChild(categoryList);
 
@@ -26,6 +27,8 @@ const displayCategories = categories => {
 
 // All news in a category
 const allNews = async id => {
+    // spinner start
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
     const res = await fetch(url);
     const data = await res.json();
@@ -43,11 +46,14 @@ const viewAllNews = newsItems => {
 
     newsItems.reverse();
 
+    // no. of news in a category
     const numberOfNews = document.getElementById('number-news');
     numberOfNews.innerHTML = `
     <h4>${newsItems.length} news found for this category.</h4>
     `;
 
+
+    // no news div and sorting div display
     const noNewsUpdate = document.getElementById('no-news');
     const viewSort = document.getElementById('view-sort');
     if (newsItems.length === 0) {
@@ -143,5 +149,5 @@ const toggleSpinner = isLoading => {
 
 
 
-
+allNews('01');
 newsCategories();
