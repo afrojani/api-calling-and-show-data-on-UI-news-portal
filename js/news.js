@@ -5,6 +5,7 @@ const newsCategories = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategories(data.data.news_category))
+        .catch(error => console.log(error))
 }
 
 const displayCategories = categories => {
@@ -37,7 +38,7 @@ const allNews = async id => {
 }
 
 const viewAllNews = newsItems => {
-    console.log(newsItems);
+    // console.log(newsItems);
 
     //sorting
     newsItems.sort(function (a, b) {
