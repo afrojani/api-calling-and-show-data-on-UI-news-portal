@@ -15,6 +15,7 @@ const displayCategories = categories => {
         const categoryList = document.createElement('li');
         categoryList.classList.add('nav-item');
 
+        // spinner start
         categoryList.innerHTML = `
         <a onclick="allNews('${category.category_id}'); toggleSpinner(true);" class="nav-link" href="#">${category.category_name}</a>
         `;
@@ -35,17 +36,27 @@ const allNews = async id => {
 const viewAllNews = newsItems => {
     console.log(newsItems);
 
+    //sorting
+    newsItems.sort(function (a, b) {
+        return a.total_view - b.total_view;
+    });
+
+    newsItems.reverse();
+
     const numberOfNews = document.getElementById('number-news');
     numberOfNews.innerHTML = `
     <h4>${newsItems.length} news found for this category.</h4>
     `;
 
     const noNewsUpdate = document.getElementById('no-news');
+    const viewSort = document.getElementById('view-sort');
     if (newsItems.length === 0) {
-        noNewsUpdate.classList.remove('d-none')
+        noNewsUpdate.classList.remove('d-none');
+        viewSort.classList.add('d-none')
     }
     else {
-        noNewsUpdate.classList.add('d-none')
+        noNewsUpdate.classList.add('d-none');
+        viewSort.classList.remove('d-none')
     }
     const allNewsContainer = document.getElementById('all-news');
     allNewsContainer.innerHTML = '';
@@ -82,6 +93,7 @@ const viewAllNews = newsItems => {
         `;
         allNewsContainer.appendChild(newsCard);
     });
+    // spinner stop
     toggleSpinner(false);
 }
 
