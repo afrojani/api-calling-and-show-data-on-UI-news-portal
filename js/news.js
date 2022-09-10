@@ -47,7 +47,7 @@ const viewAllNews = newsItems => {
     newsItems.reverse();
 
     // no. of news in a category
-    const numberOfNews = document.getElementById('number-news');
+    let numberOfNews = document.getElementById('number-news');
     numberOfNews.innerHTML = `
     <h4>${newsItems.length} news found for this category.</h4>
     `;
@@ -56,14 +56,20 @@ const viewAllNews = newsItems => {
     // no news div and sorting div display
     const noNewsUpdate = document.getElementById('no-news');
     const viewSort = document.getElementById('view-sort');
-    if (newsItems.length === 0) {
-        noNewsUpdate.classList.remove('d-none');
-        viewSort.classList.add('d-none')
+    try {
+        if (newsItems.length === 0) {
+            noNewsUpdate.classList.remove('d-none');
+            viewSort.classList.add('d-none')
+        }
+        else {
+            noNewsUpdate.classList.add('d-none');
+            viewSort.classList.remove('d-none')
+        }
     }
-    else {
-        noNewsUpdate.classList.add('d-none');
-        viewSort.classList.remove('d-none')
+    catch (err) {
+        console.log(err)
     }
+
     const allNewsContainer = document.getElementById('all-news');
     allNewsContainer.innerHTML = '';
 
